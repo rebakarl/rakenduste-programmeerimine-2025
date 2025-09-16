@@ -1,8 +1,12 @@
 import Counter from "./components/Counter"
+import Profile from "./components/Profile"
 
 function App() {
   return (
- <Counter/>
+    <>
+      <Counter />
+      <Profile />
+    </>
   )
 }
 
