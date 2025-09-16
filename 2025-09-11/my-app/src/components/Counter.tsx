@@ -10,12 +10,21 @@ function Counter() {
 
   return (
     <>
-      
       <h1>Vite + React + Karl</h1>
       <div className="card">
-        <button onClick={() => increaceCounter(10)}>
-          count is {count}
-        </button>
+        <div style={{ marginBottom: "1rem" }}>
+          <span>count is {count}</span>
+        </div>
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          <button onClick={() => increaceCounter(100)}>+100</button>
+          <button onClick={() => increaceCounter(50)}>+50</button>
+          <button onClick={() => increaceCounter(25)}>+25</button>
+          <button onClick={() => increaceCounter(1)}>+1</button>
+          <button onClick={() => increaceCounter(-1)}>-1</button>
+          <button onClick={() => increaceCounter(-25)}>-25</button>
+          <button onClick={() => increaceCounter(-50)}>-50</button>
+          <button onClick={() => increaceCounter(-100)}>-100</button>
+        </div>
       </div>
     </>
   )
