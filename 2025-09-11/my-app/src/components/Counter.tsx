@@ -2,7 +2,7 @@ import { useState } from "react"
 import "../App.css"
 
 function Counter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState<number>(0)
 
   function increaceCounter(amount: number){
         setCount(count => count + amount)
@@ -10,7 +10,7 @@ function Counter() {
 
   return (
     <>
-      <h1>Vite + React + Karl</h1>
+      <h1>Vite + React</h1>
       <div className="card">
         <div style={{ marginBottom: "1rem" }}>
           <span>count is {count}</span>
