@@ -1,17 +1,15 @@
-import { Button } from '@mui/material';
-
-function App() {
+function Home() {
   const handleClick = () => {
     alert('Button clicked!');
   };
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleClick}>
+      <button style={{ padding: '10px 20px', background: '#1976d2', color: 'white', border: 'none', borderRadius: '4px' }} onClick={handleClick}>
         Hee hee
-      </Button>
+      </button>
     </div>
   );
 }
 
-export default App;
+export default Home;

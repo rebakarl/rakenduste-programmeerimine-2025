@@ -1,17 +1,15 @@
-import { Button } from '@mui/material';
-
-function App() {
+function Something() {
   const handleClick = () => {
     alert('Button clicked!');
   };
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleClick}>
-        Dont Click me 
-      </Button>
+      <button style={{ padding: '10px 20px', background: '#d32f2f', color: 'white', border: 'none', borderRadius: '4px' }} onClick={handleClick}>
+        Dont Click me
+      </button>
     </div>
   );
 }
 
-export default App;
+export default Something;
