@@ -10,8 +10,18 @@ router.use(catsRouteMiddleware);
 
 // /cats/ Get endpoint level middleware
 router.get("/", catsGetRouteMiddleware, catsController.read);
-router.post("/", catsController.create);
-router.put("/", catsController.update);
+const { body } = require('express-validator');
+router.post(
+  "/",
+  body("name").isString().isLength({ min: 1 }).withMessage("Name is required and must be a string."),
+  catsController.create
+);
+router.put(
+  "/",
+  body("id").isString().withMessage("ID is required."),
+  body("name").optional().isString(),
+  catsController.update
+);
 router.delete("/", catsController.delete);
 
 module.exports = router;

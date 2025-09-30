@@ -15,17 +15,57 @@ const cats = [
   },
 ];
 
-exports.create = (req, res) => {
-  const { name } = req.body;
 
-  console.log(name);
-  res.sendStatus(200);
+const { validationResult } = require('express-validator');
+
+exports.create = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const { name } = req.body;
+  const newCat = {
+    id: Math.random().toString(36).substr(2, 9),
+    name,
+    createdAt: Date.now(),
+    updatedAt: null,
+    deleted: false,
+  };
+  cats.push(newCat);
+  res.status(201).json(newCat);
 };
+
 
 exports.read = (req, res) => {
-  res.send(cats);
+  res.json(cats.filter(cat => !cat.deleted));
 };
 
-exports.update = (req, res) => {};
 
-exports.delete = (req, res) => {};
+exports.update = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const { id, name } = req.body;
+  const cat = cats.find(c => c.id === id && !c.deleted);
+  if (!cat) {
+    return res.status(404).json({ error: "Cat not found" });
+  }
+  if (name) {
+    cat.name = name;
+    cat.updatedAt = Date.now();
+  }
+  res.json(cat);
+};
+
+
+exports.delete = (req, res) => {
+  const { id } = req.body;
+  const cat = cats.find(c => c.id === id && !c.deleted);
+  if (!cat) {
+    return res.status(404).json({ error: "Cat not found" });
+  }
+  cat.deleted = true;
+  cat.updatedAt = Date.now();
+  res.json({ success: true });
+};
